@@ -15,18 +15,21 @@ import javax.persistence.OneToMany;
 
 @Entity
 @NamedNativeQueries({
-	@NamedNativeQuery(name = "reproduktor.select.all", query = "SELECT r FROM Reproduktor r")	
+	@NamedNativeQuery(name = "reproduktor.select.all", 
+			query = "SELECT r FROM Reproduktor r"),
+	@NamedNativeQuery(name = "reproduktor.select.byName", 
+			query = "SELECT r FROM Reproduktor r WHERE r.name = :name")
 })
 public class Reproductor {
-	private long id;
+	private Long id;
 	
-	private String name;
-	private String country;
-	private String city;
-	private String adress;
-	private String house_number;
-	private String telephone;
-	private String e_mail;
+	private String name = "unknown";
+	private String country = "unknown";
+	private String city = "unknown";
+	private String adress = "unknown";
+	private String house_number = "unknown";
+	private String telephone = "unknown";
+	private String e_mail = "unknown";
 	
 	private List<Painting> paintings = new ArrayList<>();
 	
@@ -36,7 +39,7 @@ public class Reproductor {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	

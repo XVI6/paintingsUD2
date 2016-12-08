@@ -10,11 +10,14 @@ import javax.persistence.NamedNativeQuery;
 
 @Entity
 @NamedNativeQueries({
-	@NamedNativeQuery(name = "painting.select.all", query = "SELECT p FROM Painting p")
+	@NamedNativeQuery(name = "painting.select.all", 
+			query = "SELECT p FROM Painting p"),
+	@NamedNativeQuery(name = "painting.select.byName",
+			query = "SELECT p FROM Painting p WHERE p.name = :name")
 })
 public class Painting {
 	
-	private long id;
+	private Long id;
 	
 	private String name;
 	private int yoc;
@@ -28,7 +31,7 @@ public class Painting {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
