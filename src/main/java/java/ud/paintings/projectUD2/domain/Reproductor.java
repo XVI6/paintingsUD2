@@ -104,6 +104,5 @@ public class Reproductor {
 
 	public void setPaintings(List<Painting> paintings) {
 		this.paintings = paintings;
-	}
-	
+	}	
 }
