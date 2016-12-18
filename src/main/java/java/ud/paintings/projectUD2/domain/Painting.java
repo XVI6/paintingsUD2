@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 
+import org.hibernate.annotations.BatchSize;
+
 @Entity
 @NamedNativeQueries({
 	@NamedNativeQuery(name = "painting.select.all", 
@@ -19,11 +21,11 @@ public class Painting {
 	
 	private Long id;
 	
-	private String name;
-	private int yoc;
-	private int cost;
-	private String artist;
-	private String origin_artist;
+	private String name = "unknown";
+	private int yoc = 0;
+	private int cost = 0;
+	private String artist = "unknown";
+	private String origin_artist = "unknown";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
