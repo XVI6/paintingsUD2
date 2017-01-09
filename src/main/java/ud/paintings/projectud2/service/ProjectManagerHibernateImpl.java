@@ -13,7 +13,7 @@ import ud.paintings.projectud2.domain.Reproductor;
 
 @Component
 @Transactional
-public class ProjectManagerHibernate implements ProjectManager{
+public class ProjectManagerHibernateImpl implements ProjectManager{
 
 	@Autowired
 	private SessionFactory sessionFactory;

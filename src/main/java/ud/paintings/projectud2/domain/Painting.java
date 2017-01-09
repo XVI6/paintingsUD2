@@ -19,11 +19,11 @@ public class Painting {
 	
 	private Long id;
 	
-	private String name = "unknown";
-	private int yoc = 0;
-	private int cost = 0;
-	private String artist = "unknown";
-	private String origin_artist = "unknown";
+	private String name;
+	private int yoc;
+	private int cost;
+	private String artist;
+	private String origin_artist;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

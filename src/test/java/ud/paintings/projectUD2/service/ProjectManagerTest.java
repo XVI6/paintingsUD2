@@ -62,7 +62,7 @@ public class ProjectManagerTest {
 	private final static String E_MAIL_1 = "mail@mail.com";
 	private final static String E_MAIL_2 = "new@mail.com";
 	
-	//@Test
+	@Test
 	public void checkAddReproductor() {
 		
 		List<Reproductor> reproductors = projectManager.getAllReproductors();
