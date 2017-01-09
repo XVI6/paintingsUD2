@@ -1,4 +1,4 @@
-package java.ud.paintings.projectUD2.domain;
+package ud.paintings.projectud2.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
-
-import org.hibernate.annotations.BatchSize;
 
 @Entity
 @NamedNativeQueries({

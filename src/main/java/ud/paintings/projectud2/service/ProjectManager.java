@@ -1,8 +1,9 @@
-package java.ud.paintings.projectUD2.service;
+package ud.paintings.projectud2.service;
 
-import java.ud.paintings.projectUD2.domain.Painting;
-import java.ud.paintings.projectUD2.domain.Reproductor;
 import java.util.List;
+
+import ud.paintings.projectud2.domain.Painting;
+import ud.paintings.projectud2.domain.Reproductor;
 
 public interface ProjectManager {
 	

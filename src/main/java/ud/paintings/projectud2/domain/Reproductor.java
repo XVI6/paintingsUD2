@@ -1,4 +1,4 @@
-package java.ud.paintings.projectUD2.domain;
+package ud.paintings.projectud2.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +15,9 @@ import javax.persistence.OneToMany;
 
 @Entity
 @NamedNativeQueries({
-	@NamedNativeQuery(name = "reproduktor.select.all", 
+	@NamedNativeQuery (name = "reproduktor.select.all", 
 			query = "SELECT r FROM Reproduktor r"),
-	@NamedNativeQuery(name = "reproduktor.select.byName", 
+	@NamedNativeQuery (name = "reproduktor.select.byName", 
 			query = "SELECT r FROM Reproduktor r WHERE r.name = :name")
 })
 public class Reproductor {
@@ -31,7 +31,7 @@ public class Reproductor {
 	private String telephone = "unknown";
 	private String e_mail = "unknown";
 	
-	private List<Painting> paintings = new ArrayList<>();
+	private List<Painting> paintings = new ArrayList<Painting>();
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

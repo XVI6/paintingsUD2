@@ -1,7 +1,5 @@
-package java.ud.paintings.projectUD2.service;
+package ud.paintings.projectud2.service;
 
-import java.ud.paintings.projectUD2.domain.Painting;
-import java.ud.paintings.projectUD2.domain.Reproductor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +7,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import ud.paintings.projectud2.domain.Painting;
+import ud.paintings.projectud2.domain.Reproductor;
 
 @Component
 @Transactional
