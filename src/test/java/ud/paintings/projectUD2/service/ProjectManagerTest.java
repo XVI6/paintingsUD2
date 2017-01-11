@@ -62,7 +62,7 @@ public class ProjectManagerTest {
 	
 	private final static String E_MAIL_1 = "mail@mail.com";
 	private final static String E_MAIL_2 = "new@mail.com";
-	/*/**
+
 	@Test
 	public void checkAddReproductor() {
 		
@@ -206,7 +206,7 @@ public class ProjectManagerTest {
 //		projectManager.findPaintingsByReproductor(r);
 //		
 //	}
-	*/
+	
 	@Test
 	public void checkUpdateReproductor(){
 		
@@ -236,47 +236,105 @@ public class ProjectManagerTest {
 		
 	}
 	
-	//@Test
+	@Test
 	public void checkUpdatePainting(){
 		
-		Painting p_new = new Painting();
+		Painting p = new Painting();
+
+		p.setName(PName_1);
 		
-		p_new.setName("New Painting");
+		p.setYoc(YOC_1);
 		
-		p_new.setYoc(YOC_1);
+		p.setCost(COST_1);
 		
-		p_new.setCost(COST_1);
+		p.setArtist(AName_1);
 		
-		p_new.setArtist(AName_1);
+		p.setOriginArtist(OAName_1);
 		
-		p_new.setOriginArtist(OAName_1);
+		projectManager.addPainting(p);
 		
-		projectManager.updatePainting(p_new);
-		
-	}
+		p.setName("New Painting");
 	
-	//@Test
+		projectManager.updatePainting(p);
+		
+		projectManager.deletePainting(p);
+	}
+
+	@Test
 	public void checkDeleteReproductor(){
 		
-		Reproductor r = new Reproductor();
+		Long rId;
+		
+		Reproductor r1 = new Reproductor();
+		Reproductor r2 = new Reproductor();
+		
+		r1.setName(AName_1);
+		r2.setName(AName_2);
+		
+		r1.setCountry(Country_1);
+		r2.setCountry(Country_2);
+		
+		r1.setCity(CITY_1);
+		r2.setAdress(CITY_2);
+		
+		r1.setAdress(ADRESS_1);
+		r2.setAdress(ADRESS_2);
+		
+		r1.setHouse_number(HOUSE_NUMBER_1);
+		r2.setHouse_number(HOUSE_NUMBER_2);
+		
+		r1.setTelephone(TELEPHONE_1);
+		r2.setTelephone(TELEPHONE_2);
+		
+		r1.setEmail(E_MAIL_1);
+		r2.setEmail(E_MAIL_2);
+		
+		projectManager.addReproductor(r1);
+		projectManager.addReproductor(r2);
+		
+		rId = projectManager.findReproductorByName(AName_1).getId();
 		
 		List <Reproductor> reproductors = projectManager.getAllReproductors();
 		
 		for (Reproductor reproductor : reproductors) {
 			if (reproductor.getName().equals(AName_1)) {
-				r = reproductor;
 				projectManager.deleteReproductor(reproductor);
 			}
 		}		
 		
-		System.out.println(r.getId());
-		// assert --????
+		assertEquals(null, projectManager.findReproductorById(rId));
+		
+		projectManager.deleteReproductor(r2);
+		
 	}
 	
-	//@Test
+	@Test
 	public void checkDeletePainting(){
 		
-		int n = projectManager.getAllPaintings().size();
+		Long pId;
+		
+		Painting p1 = new Painting();
+		Painting p2 = new Painting();
+		
+		p1.setName(PName_1);
+		p2.setName(PName_2);
+		
+		p1.setYoc(YOC_1);
+		p2.setYoc(YOC_2);
+		
+		p1.setCost(COST_1);
+		p2.setCost(COST_2);
+		
+		p1.setArtist(AName_1);
+		p2.setArtist(ADRESS_2);
+		
+		p1.setOriginArtist(OAName_1);
+		p2.setOriginArtist(OAName_2);
+		
+		projectManager.addPainting(p1);
+		projectManager.addPainting(p2);
+		
+		pId = projectManager.findPaintingByName(PName_1).getId();
 		
 		List <Painting> paintings = projectManager.getAllPaintings();
 		
@@ -286,7 +344,10 @@ public class ProjectManagerTest {
 			}
 		}		
 		
-		// assert --????
+		assertEquals(null, projectManager.findPaintingById(pId));
+		
+		projectManager.deletePainting(p2);
+		
 	}
 	
 }

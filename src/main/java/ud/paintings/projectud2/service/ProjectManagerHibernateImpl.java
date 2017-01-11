@@ -53,17 +53,13 @@ public class ProjectManagerHibernateImpl implements ProjectManager{
 	public List<Painting> getAllPaintings() {
 		// TODO Auto-generated method stub
 		return sessionFactory.getCurrentSession().
-				getNamedQuery("reproduktor.select.all").list();
+				getNamedQuery("painting.select.all").list();
 	}
 
 	@Override
 	public void updateReproductor(Reproductor r) {
 		// TODO Auto-generated method stub
 		
-		//System.out.println("+++++++++++++++++++++++r.id: " + r.getId());
-		
-		Reproductor updR = (Reproductor) sessionFactory.getCurrentSession().get(Reproductor.class, r.getId());
-
 		sessionFactory.getCurrentSession().update(r);
 	}
 
@@ -77,18 +73,7 @@ public class ProjectManagerHibernateImpl implements ProjectManager{
 	public void deleteReproductor(Reproductor r) {
 		// TODO Auto-generated method stub
 		
-//		Long rId = ((Reproductor) sessionFactory.getCurrentSession().getNamedQuery("reproduktor.select.byId").setString("name", r.getName()).uniqueResult()).getId();//findReproductorByName(r.getName()).getId();
-//		r.setId(rId);
-//		r = (Reproductor) sessionFactory.getCurrentSession().get(Reproductor.class, rId);
-//		
-//		System.out.println(rId +  "+++++++++++++++++++++++++++++++++");
-//		
-//		for (Painting p : r.getPaintings()) {
-//			sessionFactory.getCurrentSession().update(p);
-//		}
-//	
 		sessionFactory.getCurrentSession().delete(r);
-		System.out.println("deleted");
 	}
 
 	@Override
@@ -132,9 +117,6 @@ public class ProjectManagerHibernateImpl implements ProjectManager{
 		// TODO Auto-generated method stub
 		r = (Reproductor) sessionFactory.getCurrentSession().
 				get(Reproductor.class, r.getId());
-		System.out.println("DDD");
-		//new ArrayList<>(r.getPaintings()); -------------------
-		List<Painting> p = new ArrayList<>(r.getPaintings());
 		return r.getPaintings();
 	}
 
