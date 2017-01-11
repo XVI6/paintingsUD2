@@ -5,14 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
+
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 @Entity
-@NamedNativeQueries({
-	@NamedNativeQuery(name = "painting.select.all", 
+@NamedQueries({
+	@NamedQuery(name = "painting.select.all", 
 			query = "SELECT p FROM Painting p"),
-	@NamedNativeQuery(name = "painting.select.byName",
+	@NamedQuery(name = "painting.select.byName",
 			query = "SELECT p FROM Painting p WHERE p.name = :name")
 })
 public class Painting {
@@ -23,19 +24,19 @@ public class Painting {
 	private int yoc;
 	private int cost;
 	private String artist;
-	private String origin_artist;
+	private String originArtist;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	@Column(unique = true, nullable = false)
+	//@Column(unique = true, nullable = false)
 	public String getName() {
 		return name;
 	}
@@ -60,12 +61,12 @@ public class Painting {
 		this.artist = artist;
 	}
 	
-	public String getOrigin_artist() {
-		return origin_artist;
+	public String getOriginArtist() {
+		return originArtist;
 	}
 
-	public void setOrigin_artist(String origin_artist) {
-		this.origin_artist = origin_artist;
+	public void setOriginArtist(String origin_artist) {
+		this.originArtist = origin_artist;
 	}
 
 	public int getCost() {

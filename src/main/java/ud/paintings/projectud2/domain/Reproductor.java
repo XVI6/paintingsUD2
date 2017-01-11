@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,12 +14,18 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 @Entity
-@NamedNativeQueries({
-	@NamedNativeQuery (name = "reproduktor.select.all", 
-			query = "SELECT r FROM Reproduktor r"),
-	@NamedNativeQuery (name = "reproduktor.select.byName", 
-			query = "SELECT r FROM Reproduktor r WHERE r.name = :name") 
+@NamedQueries({
+	@NamedQuery (name = "reproduktor.select.all", 
+			query = "SELECT r FROM Reproductor r"),
+	@NamedQuery (name = "reproduktor.select.byName", 
+			query = "SELECT r FROM Reproductor r WHERE r.name = :name"),
+	//1
+	@NamedQuery (name = "reproduktor.select.byId", 
+			query = "SELECT r.id FROM Reproductor r WHERE r.name = :name"),
 })
 public class Reproductor {
 	private Long id;
@@ -27,15 +34,15 @@ public class Reproductor {
 	private String country ;
 	private String city ;
 	private String adress ;
-	private String house_number ;
+	private String houseNumber ;
 	private String telephone ;
-	private String e_mail ;
+	private String eMail ;
 	
 	private List<Painting> paintings = new ArrayList<Painting>();
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -77,11 +84,11 @@ public class Reproductor {
 	}
 
 	public String getHouse_number() {
-		return house_number;
+		return houseNumber;
 	}
 
 	public void setHouse_number(String house_number) {
-		this.house_number = house_number;
+		this.houseNumber = house_number;
 	}
 
 	public String getTelephone() {
@@ -92,15 +99,15 @@ public class Reproductor {
 		this.telephone = telephone;
 	}
 
-	public String getE_mail() {
-		return e_mail;
+	public String getEmail() {
+		return eMail;
 	}
 
-	public void setE_mail(String e_mail) {
-		this.e_mail = e_mail;
+	public void setEmail(String e_mail) {
+		this.eMail = e_mail;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	public List<Painting> getPaintings() {
 		return paintings;
 	}

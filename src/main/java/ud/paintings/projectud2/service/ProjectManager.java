@@ -13,8 +13,8 @@ public interface ProjectManager {
 	List<Reproductor> getAllReproductors();
 	List<Painting> getAllPaintings();
 	
-	void updateReproductor(Reproductor r_new);
-	void updatePainting(Painting p_new);
+	void updateReproductor(Reproductor r);
+	void updatePainting(Painting p);
 	
 	void deleteReproductor(Reproductor r);
 	void deletePainting(Painting p);
@@ -26,5 +26,7 @@ public interface ProjectManager {
 	Painting findPaintingByName(String name);
 	
 	List<Painting> findPaintingsByReproductor(Reproductor r);
+	
+	void constraintAddPainting(Long reproductorId, Long paintingId);
 	
 }

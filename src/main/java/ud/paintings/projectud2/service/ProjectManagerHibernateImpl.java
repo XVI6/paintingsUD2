@@ -45,7 +45,7 @@ public class ProjectManagerHibernateImpl implements ProjectManager{
 	public List<Reproductor> getAllReproductors() {
 		// TODO Auto-generated method stub
 		return sessionFactory.getCurrentSession().
-				getNamedQuery("painting.select.all").list();
+				getNamedQuery("reproduktor.select.all").list();
 	}
 
 	@Override
@@ -57,21 +57,38 @@ public class ProjectManagerHibernateImpl implements ProjectManager{
 	}
 
 	@Override
-	public void updateReproductor(Reproductor r_new) {
+	public void updateReproductor(Reproductor r) {
 		// TODO Auto-generated method stub
-		sessionFactory.getCurrentSession().update(r_new);
+		
+		//System.out.println("+++++++++++++++++++++++r.id: " + r.getId());
+		
+		Reproductor updR = (Reproductor) sessionFactory.getCurrentSession().get(Reproductor.class, r.getId());
+
+		sessionFactory.getCurrentSession().update(r);
 	}
 
 	@Override
-	public void updatePainting(Painting p_new) {
+	public void updatePainting(Painting p) {
 		// TODO Auto-generated method stub
-		sessionFactory.getCurrentSession().update(p_new);
+		sessionFactory.getCurrentSession().update(p);
 	}
 
 	@Override
 	public void deleteReproductor(Reproductor r) {
 		// TODO Auto-generated method stub
+		
+//		Long rId = ((Reproductor) sessionFactory.getCurrentSession().getNamedQuery("reproduktor.select.byId").setString("name", r.getName()).uniqueResult()).getId();//findReproductorByName(r.getName()).getId();
+//		r.setId(rId);
+//		r = (Reproductor) sessionFactory.getCurrentSession().get(Reproductor.class, rId);
+//		
+//		System.out.println(rId +  "+++++++++++++++++++++++++++++++++");
+//		
+//		for (Painting p : r.getPaintings()) {
+//			sessionFactory.getCurrentSession().update(p);
+//		}
+//	
 		sessionFactory.getCurrentSession().delete(r);
+		System.out.println("deleted");
 	}
 
 	@Override
@@ -114,9 +131,22 @@ public class ProjectManagerHibernateImpl implements ProjectManager{
 	public List<Painting> findPaintingsByReproductor(Reproductor r) {
 		// TODO Auto-generated method stub
 		r = (Reproductor) sessionFactory.getCurrentSession().
-				get(Painting.class, r.getId());
+				get(Reproductor.class, r.getId());
+		System.out.println("DDD");
 		//new ArrayList<>(r.getPaintings()); -------------------
+		List<Painting> p = new ArrayList<>(r.getPaintings());
 		return r.getPaintings();
 	}
+
+	@Override
+	public void constraintAddPainting(Long reproductorId, Long paintingId) {
+		// TODO Auto-generated method stub
+		
+		Reproductor r = (Reproductor) sessionFactory.getCurrentSession().get(Reproductor.class, reproductorId);
+		Painting p = (Painting) sessionFactory.getCurrentSession().get(Painting.class, paintingId);
+		r.getPaintings().add(p);
+	}
+	
+	
 	
 }
