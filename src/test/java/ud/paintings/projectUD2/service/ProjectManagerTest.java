@@ -21,7 +21,7 @@ import ud.paintings.projectud2.service.ProjectManager;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/beans.xml"})
 @TransactionConfiguration(transactionManager = "txManager", 
-						defaultRollback = false)
+						defaultRollback = true)
 @Transactional
 public class ProjectManagerTest {
 	
@@ -70,12 +70,23 @@ public class ProjectManagerTest {
 		
 		for (Reproductor reproductor : reproductors) {
 			if (reproductor.getName().equals(AName_1) || reproductor.getName().equals(AName_2)) {
+				
+				//1
 				projectManager.deleteReproductor(reproductor);
+				
+				/*
+				//2
+				Reproductor delr1 = projectManager.findReproductorByName(AName_1);
+				projectManager.deleteReproductor(delr1);
+				*/
 			}
 		}
 		
 		Reproductor r1 = new Reproductor();
 		Reproductor r2 = new Reproductor();
+		
+		r1.setId(null);
+		r2.setId(null);
 		
 		r1.setName(AName_1);
 		r2.setName(AName_2);
@@ -115,8 +126,41 @@ public class ProjectManagerTest {
 	@Test
 	public void checkAddPainting(){
 		
+		List<Painting> paintings = projectManager.getAllPaintings();
+		
+		for (Painting painting : paintings) {
+			if (painting.getName().equals(AName_1) || painting.getName().equals(AName_2)) {
+				projectManager.deletePainting(painting);
+			}
+		}
+		
+		
+		List<Reproductor> reproductors = projectManager.getAllReproductors();
+		
+		for (Reproductor reproductor : reproductors) {
+			if (reproductor.getName().equals(AName_1)) {
+				projectManager.deleteReproductor(reproductor);
+			}
+		}
+		
+		Reproductor r1 = new Reproductor();
+		r1.setName(AName_1);
+		r1.setCountry(Country_1);
+		r1.setCity(CITY_1);
+		r1.setAdress(ADRESS_1);
+		r1.setHouse_number(HOUSE_NUMBER_1);
+		r1.setTelephone(TELEPHONE_1);
+		r1.setEmail(E_MAIL_1);
+		
+		projectManager.addReproductor(r1);
+		
+		
+		
 		Painting p1 = new Painting();
 		Painting p2 = new Painting();
+		
+		p1.setId(null);
+		p2.setId(null);
 		
 		p1.setName(PName_1);
 		p2.setName(PName_2);
@@ -136,11 +180,16 @@ public class ProjectManagerTest {
 		projectManager.addPainting(p1);
 		projectManager.addPainting(p2);
 		
+		
+		
 		Painting retrievedP1 = projectManager.findPaintingByName(PName_1);
 		Painting retrievedP2 = projectManager.findPaintingByName(PName_2);
 		
 		assertEquals(PName_1, retrievedP1.getName());
 		assertEquals(PName_2, retrievedP2.getName());
+		
+		
+		projectManager.deleteReproductor(r1);
 		
 		projectManager.deletePainting(p1);
 		projectManager.deletePainting(p2);

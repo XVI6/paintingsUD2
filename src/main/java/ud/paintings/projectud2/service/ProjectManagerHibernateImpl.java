@@ -1,6 +1,5 @@
 package ud.paintings.projectud2.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -72,8 +71,11 @@ public class ProjectManagerHibernateImpl implements ProjectManager{
 	@Override
 	public void deleteReproductor(Reproductor r) {
 		// TODO Auto-generated method stub
+		r = (Reproductor) sessionFactory.getCurrentSession().get(Reproductor.class,
+				r.getId());
 		
 		sessionFactory.getCurrentSession().delete(r);
+		
 	}
 
 	@Override
